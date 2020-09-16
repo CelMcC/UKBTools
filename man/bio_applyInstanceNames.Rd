@@ -13,7 +13,7 @@ bio_applyInstanceNames(df, textTag = "Inst")
 \item{textTag}{optional tag to show the content of the field}
 }
 \value{
-
+a data.frame with new names
 }
 \description{
 Takes a raw UKB data table and applies instance names to columns

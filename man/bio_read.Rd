@@ -14,7 +14,7 @@ bio_read(udi, baseOnly = FALSE, printHead = FALSE)
 \item{printHead}{binary, print the first part of input data?}
 }
 \value{
-
+a data.frame with text contents
 }
 \description{
 Main Current UKB reading function

@@ -12,7 +12,7 @@ biochem_read(udi, thename)
 \item{thename}{character string, name for the new aggregated field}
 }
 \value{
-
+a numeric data.frame
 }
 \description{
 Convenience function for aggregating the mean for biochemistry records

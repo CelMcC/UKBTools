@@ -12,7 +12,7 @@ do_LOG(temp, sources)
 \item{sources}{character vector showing source of indicator variables}
 }
 \value{
-
+a string vector, string result for each row
 }
 \description{
 Create a log field with sources as input

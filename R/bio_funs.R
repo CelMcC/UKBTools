@@ -7,7 +7,6 @@
 #' @return a numeric vector
 #' @export
 #'
-#' @examples
 numFun<- function(x){
   x<- as.numeric(x)
   x<- ifelse(x< 0,NA,x)
@@ -20,7 +19,6 @@ numFun<- function(x){
 #' @return a numeric vector with outliers removed
 #' @export
 #'
-#' @examples
 applyIQRrule<- function(x){
   #http://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_summarizingdata/bs704_summarizingdata7.html
   sk<-   skimr::skim(x)
@@ -45,7 +43,6 @@ applyIQRrule<- function(x){
 #' @return a data.frame
 #' @export
 #'
-#' @examples
 bio_numeric<- function(df,colIndex= 2:ncol(df)){
   outdf<- df
   if (ncol(df) < 3) {
@@ -68,7 +65,6 @@ bio_numeric<- function(df,colIndex= 2:ncol(df)){
 #' @return a data.frame
 #' @export
 #'
-#' @examples
 bio_numFun <- function(df,colIndex= 2:ncol(df)){
   outdf<- df
   if (ncol(df) < 3) {
@@ -85,10 +81,9 @@ bio_numFun <- function(df,colIndex= 2:ncol(df)){
 #' @param temp data.frame with binary indicators
 #' @param sources character vector showing source of indicator variables
 #'
-#' @return
-#' @export a string vector, string result for each row
+#' @return a string vector, string result for each row
+#' @export
 #'
-#' @examples
 do_LOG<- function(temp, sources){
   logmat<-  newmatrix(nrow(temp),length(sources))
   for (j in 1:length(sources)){
@@ -104,7 +99,7 @@ do_LOG<- function(temp, sources){
 #' @param df raw UKB data.frame
 #' @param textTag optional tag to show the content of the field
 #'
-#' @return
+#' @return a data.frame with new names
 #' @export
 #'
 #' @examples
@@ -150,7 +145,7 @@ bio_rename<- function(sett, namevec){
 #' @param baseOnly binary, restrict result to baseline only?
 #' @param printHead binary, print the first part of input data?
 #'
-#' @return
+#' @return a data.frame with text contents
 #' @export
 #'
 #' @examples
@@ -178,7 +173,7 @@ bio_read<- function(udi,baseOnly= FALSE, printHead=FALSE) {
 #' @param udi UKB field number
 #' @param thename character string, name for the new aggregated field
 #'
-#' @return
+#' @return a numeric data.frame
 #' @export
 #'
 #' @examples
