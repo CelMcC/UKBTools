@@ -144,7 +144,6 @@ newmatrix<- function(nr,nc,thing=NA) {
 #' @return a data.frame
 #' @export
 #'
-#' @examples
 clearNaNs<- function(x){
   x[is.nan(x)]<- NA
   x[is.infinite(x)]<- NA
@@ -160,7 +159,6 @@ clearNaNs<- function(x){
 #' @return a string
 #' @export
 #'
-#' @examples
 collapseString<- function(x, distinctVals=FALSE){
   missingSet<- c(""," ","N/A","NA","NULL")
   y<- as.character(as.vector(x))
@@ -187,7 +185,6 @@ collapseString<- function(x, distinctVals=FALSE){
 #' @return data.frame with new labels
 #' @export
 #'
-#' @examples
 label_cols<- function(sett,label,before="before") {
   P<- ncol(sett)
   if (before!= "before") {
@@ -199,19 +196,65 @@ label_cols<- function(sett,label,before="before") {
 }
 
 
+#' Are the elements of the vector unique?
+#'
+#' @param vec a vector
+#'
+#' @return binary
+#' @export
+#'
+#' @examples
+#' are_unique(c(1,1,2,3))
+are_unique<- function(vec){
+  uvec<- unique(vec)
+  length(uvec)==length(vec)
+}
+
+#' Points a read function towards the nominated data source
+#' Relies on prior specification of the dataSourceFolder
+#' @param filename character string, the name of the file
+#'
+#' @return extended file path string
+#' @export
+#'
 fromSrc<- function(filename){
   return(paste0(dataSourceFolder,filename))
 }
 
+
+#' Check if the keys in a data frame are unique / good to join
+#' Specificallly for UKB, the key field is assumed to be f.eid
+#'
+#' @param df a data.frame
+#'
+#' @return binary
+#' @export
+#'
+#' @examples
+#' checkkey(df)
 checkkey<- function(df){
   return(howmany(df$f.eid)==nrow(df))
 }
 
+#' Simple percentage table of a vector
+#'
+#' @param x a vector
+#'
+#' @return a percentage table
+#' @export
+#'
 percentable<- function(x) {
   res<- round(prop.table(table(x)),3)
   return(res)
 }
 
+#' Pulls out disease names and formats to column names
+#'
+#' @param vec
+#'
+#' @return vec
+#' @export
+#'
 beforeParenthesis<- function(vec){
   parenthLoc<- str_locate(vec,"\\(")[,1]
   trimmed<-    ifelse(is.na(parenthLoc), vec, str_sub(vec,0,parenthLoc-1))
@@ -222,6 +265,13 @@ beforeParenthesis<- function(vec){
 }
 
 
+#' Converts a bunch of strings to sensible column names
+#'
+#' @param vec
+#'
+#' @return vec
+#' @export
+#'
 niceNames<- function(vec){
   trimmed<-    trimws(vec)
   trimmed<-    str_replace_all(trimmed,"[:space:]","_")
