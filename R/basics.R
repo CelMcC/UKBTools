@@ -197,3 +197,37 @@ label_cols<- function(sett,label,before="before") {
   }
   return(sett)
 }
+
+
+fromSrc<- function(filename){
+  return(paste0(dataSourceFolder,filename))
+}
+
+checkkey<- function(df){
+  return(howmany(df$f.eid)==nrow(df))
+}
+
+percentable<- function(x) {
+  res<- round(prop.table(table(x)),3)
+  return(res)
+}
+
+beforeParenthesis<- function(vec){
+  parenthLoc<- str_locate(vec,"\\(")[,1]
+  trimmed<-    ifelse(is.na(parenthLoc), vec, str_sub(vec,0,parenthLoc-1))
+  trimmed<-    trimws(trimmed)
+  trimmed<-    str_replace_all(trimmed,"[\\s\\-/,]","_")
+  trimmed<-    str_replace_all(trimmed,"__","_")
+  return(trimmed)
+}
+
+
+niceNames<- function(vec){
+  trimmed<-    trimws(vec)
+  trimmed<-    str_replace_all(trimmed,"[:space:]","_")
+  trimmed<-    str_replace_all(trimmed,"[:punct:]","_")
+  trimmed<-    str_replace_all(trimmed,"__","_")
+  trimmed<-    str_replace_all(trimmed,"__","_")
+  return(trimmed)
+}
+
