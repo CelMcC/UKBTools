@@ -19,6 +19,3 @@ a data.frame with new names
 Takes a raw UKB data table and applies instance names to columns
 Only for use where one column per instance, can supply a textTag
 }
-\examples{
-height_data<- temp \%>\% bio_applyInstanceNames(textTag= "height")
-}

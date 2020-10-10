@@ -15,6 +15,3 @@ an integer
 \description{
 Returns the number of unique values in the vector
 }
-\examples{
-howmany(IP$f.eid)
-}

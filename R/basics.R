@@ -21,8 +21,6 @@ putFolder<- function(folderName) {
 #' @return numeric vector
 #' @export
 #'
-#' @examples
-#' IP$diabetes<- fixNAs(IP$diabetes)
 fixNAs<- function(thevec){
   thevec<- ifelse(is.na(thevec),0,thevec)
   return(thevec)
@@ -36,8 +34,6 @@ fixNAs<- function(thevec){
 #' @return x vector not including elements
 #' @export
 #'
-#' @examples
-#' c("a", "b", "c", "d") %>% not_including(c("a","b"))
 not_including<- function(x,elements){
   y<- x[!x %in% elements]
   return(y)
@@ -51,8 +47,6 @@ not_including<- function(x,elements){
 #' @return none
 #' @export
 #'
-#' @examples
-#' to_clipboard(t0)
 to_clipboard<- function(x = .Last.value) {
   clipr::write_clip(x)
 }
@@ -67,12 +61,10 @@ to_clipboard<- function(x = .Last.value) {
 #' @return character vector of column name matches
 #' @export
 #'
-#' @examples
-#' shownames(IP, "patient")
 shownames<- function(SETT,TEXT) {
   TEXT<- toupper(TEXT)
   thenames<- toupper(names(SETT))
-  return(names(SETT)[thenames %like% TEXT])
+  return(names(SETT)[str_detect(thenames, TEXT)])
 }
 
 
@@ -82,11 +74,9 @@ shownames<- function(SETT,TEXT) {
 #'
 #' @return data.frame
 #' @export
-#'
-#' @examples
-#' OB<- OB %>% putZeros()
+
 putZeros<- function(OB) {
-  OB<- OB %>% mutate_at(vars(-group_cols()),~replace(.,is.na(.),0))
+  OB<- mutate_at(OB, vars(-group_cols()),~replace(.,is.na(.),0))
   return(OB)
 }
 
@@ -113,8 +103,6 @@ padded<- function(thingToPad,width) {
 #' @return an integer
 #' @export
 #'
-#' @examples
-#' howmany(IP$f.eid)
 howmany<- function(thevar) {
   res<- length(unique(thevar))
   return(res)
@@ -130,7 +118,6 @@ howmany<- function(thevar) {
 #' @return a data frame
 #' @export
 #'
-#' @examples
 newmatrix<- function(nr,nc,thing=NA) {
   newmat<- matrix(rep(thing,nr*nc),nrow=nr,ncol=nc)
   newmat<- data.frame(newmat)
@@ -226,14 +213,15 @@ fromSrc<- function(filename){
 #' Specificallly for UKB, the key field is assumed to be f.eid
 #'
 #' @param df a data.frame
+#' @param field the column of keys
 #'
 #' @return binary
 #' @export
 #'
 #' @examples
 #' checkkey(df)
-checkkey<- function(df){
-  return(howmany(df$f.eid)==nrow(df))
+checkkey<- function(df, field="df$f.eid"){
+  return(howmany(field) == nrow(df))
 }
 
 #' Simple percentage table of a vector

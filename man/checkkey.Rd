@@ -5,10 +5,12 @@
 \title{Check if the keys in a data frame are unique / good to join
 Specificallly for UKB, the key field is assumed to be f.eid}
 \usage{
-checkkey(df)
+checkkey(df, field = "df$f.eid")
 }
 \arguments{
 \item{df}{a data.frame}
+
+\item{field}{the column of keys}
 }
 \value{
 binary

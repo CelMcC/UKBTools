@@ -102,8 +102,6 @@ do_LOG<- function(temp, sources){
 #' @return a data.frame with new names
 #' @export
 #'
-#' @examples
-#' height_data<- temp %>% bio_applyInstanceNames(textTag= "height")
 bio_applyInstanceNames<- function(df,textTag="Inst"){
   # returns renamed df
   inst_pat<- "\\.([0123])\\."
@@ -149,8 +147,8 @@ bio_rename<- function(sett, namevec){
 #' @export
 #'
 #' @examples
-bio_read<- function(udi,baseOnly= FALSE, printHead=FALSE) {
-  #
+bio_read<- function(udi,baseOnly= FALSE,printHead=FALSE) {
+  # Current UKB reading function
   filename<- paste0(dataSourceFolder,"f.",udi,".tab")
   if (!file.exists(filename)) {
     cat("\nError: File does not exist in Data folder. Please check file is downloaded")
@@ -180,9 +178,10 @@ bio_read<- function(udi,baseOnly= FALSE, printHead=FALSE) {
 biochem_read<- function(udi,thename){
   # convenience function for aggregating the mean for biochemistry records
   cat(paste('\nReading udi: ',udi," ",thename))
-  temp      <-  bio_read(udi) %>% bio_numeric()
+  temp      <-  bio_read(udi)
+  temp      <-  bio_numeric(temp)
   temp$agg  <- apply(temp[,-1], 1, mean, na.rm=TRUE)
-  temp<- temp %>% select(f.eid,agg)
+  temp<- select(temp, f.eid, agg)
   names(temp)[2]<- thename
   return(temp)
 }

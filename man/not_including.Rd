@@ -17,6 +17,3 @@ x vector not including elements
 \description{
 Exclude elements in a vector
 }
-\examples{
-c("a", "b", "c", "d") \%>\% not_including(c("a","b"))
-}

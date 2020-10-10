@@ -15,6 +15,3 @@ numeric vector
 \description{
 Convert missing values in a vector into zeros
 }
-\examples{
-IP$diabetes<- fixNAs(IP$diabetes)
-}

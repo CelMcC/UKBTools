@@ -15,6 +15,3 @@ data.frame
 \description{
 Replace NAs in an entire data frame with zeros
 }
-\examples{
-OB<- OB \%>\% putZeros()
-}

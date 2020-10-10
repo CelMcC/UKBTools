@@ -15,6 +15,3 @@ none
 \description{
 Copies object x to the clipboard
 }
-\examples{
-to_clipboard(t0)
-}

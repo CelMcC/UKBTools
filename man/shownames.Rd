@@ -19,6 +19,3 @@ character vector of column name matches
 Show all names in a data frame with partial match
 to a TEXT tag
 }
-\examples{
-shownames(IP, "patient")
-}
