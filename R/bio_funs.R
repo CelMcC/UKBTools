@@ -155,7 +155,7 @@ bio_read<- function(udi,baseOnly= FALSE,printHead=FALSE) {
   } else {
     theset<- fread(filename,sep="\t",colClasses = "character",header = T) %>% data.frame() %>%
       select(order(colnames(.))) %>% select(f.eid,everything())
-    theset<- theset %>% select(sstartsWith("f"))
+    theset<- theset %>% select(startsWith("f"))
     theset<- theset %>% arrange(f.eid)
     if (baseOnly) {
       theset<- theset %>% select(f.eid, matches("\\.0\\."))
