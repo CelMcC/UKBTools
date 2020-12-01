@@ -147,21 +147,22 @@ bio_rename<- function(sett, namevec){
 #' @export
 #'
 #' @examples
-bio_read<- function(udi,baseOnly= FALSE,printHead=FALSE) {
+bio_read<- function(udi,baseOnly= FALSE) {
   # Current UKB reading function
   filename<- paste0(dataSourceFolder,"f.",udi,".tab")
   if (!file.exists(filename)) {
     cat("\nError: File does not exist in Data folder. Please check file is downloaded")
   } else {
-    theset<- fread(filename,sep="\t",colClasses = "character",header = T) %>% data.frame() %>%
+    theset<- fread(filename,sep="\t",colClasses = "character",header = T)  %>%
       select(order(colnames(.))) %>% select(f.eid,everything())
-    theset<- theset %>% select(startsWith("f"))
-    theset<- theset %>% arrange(f.eid)
+    idx<- which(names(theset) %like% "f\\.")
+    theset<- theset %>% select(all_of(idx))
+    theset<- theset[order(f.eid)]
     if (baseOnly) {
       theset<- theset %>% select(f.eid, matches("\\.0\\."))
       names(theset)[2:ncol(theset)]<- paste0("base",padded(1:((ncol(theset)-1)),2))
     }
-    if (printHead) print(head(theset))
+    theset[theset==""]<- NA
     return(theset)
   }
 }
