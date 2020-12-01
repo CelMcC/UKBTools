@@ -153,9 +153,9 @@ bio_read<- function(udi,baseOnly= FALSE,printHead=FALSE) {
   if (!file.exists(filename)) {
     cat("\nError: File does not exist in Data folder. Please check file is downloaded")
   } else {
-    theset<- read.table(filename,sep="\t",colClasses = "character",header = T) %>% data.frame() %>%
+    theset<- fread(filename,sep="\t",colClasses = "character",header = T) %>% data.frame() %>%
       select(order(colnames(.))) %>% select(f.eid,everything())
-    if ("X" %in% names(theset)) theset<- theset %>% select(-X)
+    theset<- theset %>% select(sstartsWith("f"))
     theset<- theset %>% arrange(f.eid)
     if (baseOnly) {
       theset<- theset %>% select(f.eid, matches("\\.0\\."))
