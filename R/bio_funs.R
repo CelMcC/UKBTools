@@ -156,8 +156,7 @@ bio_read<- function(udi,baseOnly= FALSE) {
     theset<- fread(filename,sep="\t",colClasses = "character",header = T)  %>%
       select(order(colnames(.))) %>% select(f.eid,everything())
     idx<- which(names(theset) %like% "f\\.")
-    theset<- theset %>% select(all_of(idx))
-    theset<- theset[order(f.eid)]
+    theset<- theset %>% select(all_of(idx)) %>% arrange(f.eid)
     if (baseOnly) {
       theset<- theset %>% select(f.eid, matches("\\.0\\."))
       names(theset)[2:ncol(theset)]<- paste0("base",padded(1:((ncol(theset)-1)),2))
